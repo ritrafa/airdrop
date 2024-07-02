@@ -8,10 +8,13 @@ const connection = new Connection("https://api.devnet.solana.com");
 
 (async () => {
     try {
+        const slot = await connection.getSlot();
+        console.log(`Current Slot: ${slot}`);
         // We're going to claim 2 devnet SOL tokens
+        console.log(`Attempting 2 SOL airdrop to ${keypair.publicKey}`);
         const txhash = await connection.requestAirdrop(keypair.publicKey, 2 * LAMPORTS_PER_SOL);
         console.log(`Success! Check out your TX here: 
-        https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
+        https://explorer.solana.com/tx/${txhash}?cluster=custom`);
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
